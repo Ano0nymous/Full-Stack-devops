@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-node
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: my-node
+  template:
+    metadata:
+      labels:
+        app: my-node
+    spec:
+      containers:
+        - name: my-node
+          image: hamz45/hello-node:v4
+          ports:
+            - containerPort: 8080
+          env:
+          - name: APP_MESSAGE
+            valueFrom:
+             configMapKeyRef:
+              name: app-config
+              key: APP_MESSAGE
+          - name: DB_PASSWORD
+            valueFrom:
+             secretKeyRef:
+              name: db-secret
+              key: DB_PASSWORD
+          
+               
+      
+             
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: my-node
+spec:
+  selector:
+    app: my-node
+  type: NodePort
+  ports:
+    - port: 8080
+      targetPort: 8080  
+      nodePort: 31000   

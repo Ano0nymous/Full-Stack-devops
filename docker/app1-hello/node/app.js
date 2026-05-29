@@ -1,14 +1,17 @@
 const express = require("express");
 const app = express();
-const PORT = process.env.PORT || 3000;
-const ENV = process.env.ENV_VALUE || "No env set";
+const PORT = process.env.PORT || 8080;
+const ENV = process.env.APP_MESSAGE || "No env set";
+const DB_PASSWORD = process.env.DB_PASSWORD || "No DB password set";
 const HOSTNAME = process.env.HOSTNAME || require('os').hostname();
 
-app.get("/", (req, res) => {
+app.get("/pt", (req, res) => {
   res.json({
     message: "Hello from Simple App (Node)",
-    env: ENV,
-    container: HOSTNAME
+    env: ENV, 
+    container: HOSTNAME,
+    dbPassword: DB_PASSWORD
+    
   });
 });
 

@@ -1,0 +1,15 @@
+services:
+  service-a-spring:
+    build: ./service-a
+    ports:
+     - "3000:3000"
+    depends_on:
+     - service-b-spring
+    environment:
+      - TAX_SERVICE_URL=http://service-b-spring:4000
+  service-b-spring:
+    build: ./service-b
+    ports:
+     - "4000:4000"
+      
+  

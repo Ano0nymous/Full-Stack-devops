@@ -1,0 +1,13 @@
+apiVersion: eksctl.io/v1alpha5
+kind: ClusterConfig
+
+metadata:
+  name: service           # Your cluster name
+  region: us-west-2       # A region with better capacity
+  version: "1.34"
+
+managedNodeGroups:
+- name: ng-1
+  instanceTypes: ["t3.medium", "t3.large", "m5.large"] # Flexibility is key
+  desiredCapacity: 2
+  privateNetworking: false # Simpler for a learning cluster

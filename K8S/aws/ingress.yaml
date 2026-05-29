@@ -1,0 +1,29 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress
+  annotations:
+    nginx.ingress.kubernetes.io/use-regex: "true"
+    nginx.ingress.kubernetes.io/rewrite-target: /$1
+spec:
+  ingressClassName: nginx          # or leave out if default is set
+  rules:
+                # optional – remove to match any host
+   - http:
+      paths:
+      # Rule 1: /api/.*  → rewrite to /.*  and go to frontend-service
+      - path: /api/(.*)
+        pathType: ImplementationSpecific
+        backend:
+          service:
+            name: service-a
+            port:
+              number: 3000
+      # Rule 2: everything else (catch‑all) → go to service‑a
+      - path: /(.*)
+        pathType: ImplementationSpecific
+        backend:
+          service:
+            name: frontend
+            port:
+              number: 80

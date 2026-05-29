@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: service-a
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: service-a
+  template:
+    metadata:
+      labels:
+        app: service-a
+    spec:
+      containers:
+        - name: service-a
+          image: hamz45/service-a
+          ports:
+            - containerPort: 3000
+          env:
+          - name: TAX_SERVICE_URL
+            valueFrom:
+              configMapKeyRef:
+               name: app-config
+               key: TAX_SERVICE_URL
+          - name: FRONTEND_URL
+            valueFrom:
+             configMapKeyRef:
+              name: app-config
+              key: FRONTEND_URL
+              
+          
+          
+               
+      
+             
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: service-a
+spec:
+  selector:
+    app: service-a
+  type: NodePort
+  ports:
+    - port: 3000
+      targetPort: 3000  
+      nodePort: 31100   

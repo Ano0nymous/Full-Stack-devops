@@ -1,0 +1,9 @@
+services:
+  app:
+    build: .
+    ports:
+      - "5000:5000"
+    env_file:
+      - .env
+    # web app needs interactive? No, it runs as a server.
+    # Remove stdin_open and tty unless you still want CLI.

@@ -1,0 +1,15 @@
+services:
+  service-a-python:
+    build: ./service-a
+    ports:
+     - "3000:3000"
+    depends_on:
+     - service-b-python
+    environment:
+      - TAX_SERVICE_URL=http://service-b-python:4000
+  service-b-python:
+    build: ./service-b
+    ports:
+     - "4000:4000"
+      
+  
