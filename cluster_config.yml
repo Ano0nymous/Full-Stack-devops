@@ -1,0 +1,15 @@
+# cluster-config.yaml
+apiVersion: eksctl.io/v1alpha5
+kind: ClusterConfig
+
+metadata:
+  name: my-cluster
+  region: ap-south-1
+  version: "1.34"
+
+managedNodeGroups:
+- name: ng-1
+  instanceType: t3.micro
+  desiredCapacity: 1
+  minSize: 1
+  maxSize: 2
