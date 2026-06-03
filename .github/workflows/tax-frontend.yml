@@ -57,6 +57,7 @@ jobs:
             with:
                 context: docker/app2-tax-calculator/tax-calculator-frontend
                 push: true
+                provenance: false
                 tags: |
                     ${{ secrets.DOCKER_USERNAME }}/tax-calculator-frontend:latest   
 
