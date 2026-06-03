@@ -87,15 +87,19 @@ jobs:
           - name: Verify connection
             run: kubectl get nodes
 
-          - name: List directories
+          - name: Locate frontend.yaml
             run: |
-              echo "Current directory: $(pwd)"
-              echo "Listing all k8s* folders:"
-              ls -ld k8s* K8s* k8S* K8S* 2>/dev/null || echo "No matching folders found"
-              echo "Recursive search for frontend.yaml:"
-              find . -name "frontend.yaml" -type f
+             echo "Current working directory: $(pwd)"
+             echo "Full directory tree (first 2 levels):"
+             ls -la
+             echo "Search for any .yaml file named frontend:"
+             find . -name "frontend.yaml" -type f
+             echo "Search for any ingress.yaml:"
+             find . -name "ingress.yaml" -type f
+             echo "Check if there's a k8s folder (case insensitive):"
+             ls -d */ | grep -i k8s || echo "No k8s* folder found"
 
           - name: Deploy to AWS (Kubernetes)
             run: |
-             kubectl apply -f k8s/aws/frontend.yaml
-             kubectl apply -f k8s/aws/ingress.yaml
+             kubectl apply -f k8S/aws/frontend.yaml
+             kubectl apply -f k8S/aws/ingress.yaml
