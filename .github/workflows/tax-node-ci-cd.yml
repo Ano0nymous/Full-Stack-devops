@@ -84,5 +84,6 @@ jobs:
 
           - name: Deploy to AWS (Kubernetes)
             run: |
-                kubectl apply -f k8s/aws/app2-tax-calculator/service-a
-                kubectl apply -f k8s/aws/app2-tax-calculator/service-b
+                kubectl apply -f k8S/aws/service-a.yaml
+                kubectl apply -f k8S/aws/service-b.yaml
+                kubectl apply -f k8S/aws/config.yaml
