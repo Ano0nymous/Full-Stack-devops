@@ -81,7 +81,7 @@ jobs:
 
           - name: Update kubeconfig for EKS
             run: |
-              aws eks update-kubeconfig --name hello-cluster --region ap-south-1
+              aws eks update-kubeconfig --name my-cluster --region ap-south-1
 
           - name: Verify connection
             run: kubectl get nodes
