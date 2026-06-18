@@ -23,7 +23,7 @@ jobs:
 
           - name: Install Dependencies
             working-directory: docker/app1-hello/node
-            run: npm ci
+            run: npm install
 
           - name: Run Tests (If any)
             working-directory: docker/app1-hello/node
