@@ -6,7 +6,7 @@ on:
      branches:
          - main
      paths:
-        - "docker/app1-hello/springboot/hello-spring"
+        - "dock1-hello/springboot/hello-spring"
 
 jobs:
     build-test:
